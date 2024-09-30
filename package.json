@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
     "antd": "^5.21.1",
     "axios": "^1.7.7",
     "firebase": "^10.13.2",
     "firebase-admin": "^12.5.0",
     "next": "14.2.13",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-google-maps": "^9.4.5",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20",
