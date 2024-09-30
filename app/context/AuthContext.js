@@ -10,8 +10,6 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { USER_COLLECTION, auth, db } from "../lib/firebase";
-import axios from "axios";
-import axiosApiInstance from "../utils/axiosClient";
 import { useRouter } from "next/navigation";
 import { message } from "antd";
 import { doc, setDoc } from "firebase/firestore";

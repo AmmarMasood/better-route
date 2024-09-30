@@ -1,6 +1,6 @@
 import axios from "axios";
 import { auth } from "../lib/firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 const axiosApiInstance = axios.create();
 
@@ -18,7 +18,7 @@ const getLatestFirebaseToken = async () => {
         localStorage.removeItem("emailNotVerified");
         location.reload();
       })
-      .catch((error) => {
+      .catch(() => {
         console.log("unable to logout");
       });
   }

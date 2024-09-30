@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const withAuth = (Component: any) => {
   const Wrapper = (props: any) => {

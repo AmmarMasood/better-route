@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import Loading from "./components/Loading";
 
 function Login() {
-  const { emailPasswordSignin, initializeUser, setToken } = UserAuth() as any;
+  const { emailPasswordSignin, setToken } = UserAuth() as any;
 
   const [details, setDetails] = useState({
     email: "",
@@ -94,7 +94,7 @@ function Login() {
           </button>
 
           <p className="mt-4 text-sm text-center text-black">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/auth" className="text-blue-500">
               Register
             </Link>
