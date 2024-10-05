@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 function CustomUpload({ handleParsedAddresses }: any) {
   const props = {
     accept: ".xlsx,.csv",
+    showUploadList: false,
     beforeUpload: (file: any) => {
       const reader = new FileReader();
       reader.onload = (evt: any) => {
@@ -27,15 +28,17 @@ function CustomUpload({ handleParsedAddresses }: any) {
           return;
         }
 
+        // if size is great than 10  then show error
+        if (data.length > 10) {
+          message.error("You can upload only 10 addresses at a time");
+          return;
+        }
+
         // If the file is valid, you can continue processing the data
         console.log("data", data);
 
-        const paths = data.slice(1, -1).map((item: any, index: any) => {
-          return {
-            id: index + 1,
-            pointA: item[0],
-            pointB: (data[index + 2] as any)[0],
-          };
+        const paths = data.slice(1, -1).map((item: any) => {
+          return item[0];
         });
 
         handleParsedAddresses(paths);

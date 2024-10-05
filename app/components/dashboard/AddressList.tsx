@@ -22,8 +22,8 @@ function AddressList({ paths, selectedPath, onSelect, filterPaths }: any) {
             <div className="w-[150px]">{path.pointA}</div>
             <ArrowRightOutlined />
             <div className="w-[150px]">{path.pointB}</div>
-            <div>{path.distance ?? "0"} km</div>
-            <div>{path.duration ?? "0"} min</div>
+            <div>{path.distance.text ?? "0"}</div>
+            <div>{path.duration.text ?? "0"}</div>
           </div>
         ))}
       </div>
