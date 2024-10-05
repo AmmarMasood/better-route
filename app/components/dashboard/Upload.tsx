@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, message, Upload } from "antd";
 import * as XLSX from "xlsx";
+import { BATCH_SIZE } from "@/app/contants";
 
 function CustomUpload({ handleParsedAddresses }: any) {
   const props = {
@@ -29,8 +30,10 @@ function CustomUpload({ handleParsedAddresses }: any) {
         }
 
         // if size is great than 10  then show error
-        if (data.length > 10) {
-          message.error("You can upload only 10 addresses at a time");
+        if (data.length > BATCH_SIZE) {
+          message.error(
+            `You can upload only ${BATCH_SIZE} addresses at a time`
+          );
           return;
         }
 

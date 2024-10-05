@@ -12,6 +12,7 @@ import GoogleMatrixAPI from "./google-matrix";
 import Loading from "../components/Loading";
 import AddAddressModal from "../components/dashboard/AddAddressModal";
 import ImportFilesModal from "../components/dashboard/ImportFilesModal";
+import { BATCH_SIZE } from "../contants";
 
 function Dashboard() {
   const { user } = UserAuth() as any;
@@ -34,8 +35,8 @@ function Dashboard() {
       message.error("No addresses found in the file");
       return;
     }
-    if (customPaths.length > 10) {
-      message.error("You can upload only 10 addresses at a time");
+    if (customPaths.length > BATCH_SIZE) {
+      message.error(`You can upload only ${BATCH_SIZE} addresses at a time`);
       return;
     }
 
@@ -84,8 +85,8 @@ function Dashboard() {
       return;
     }
 
-    if (uploadedPath.length >= 10) {
-      message.error("You can only add 10 addresses at a time");
+    if (uploadedPath.length >= BATCH_SIZE) {
+      message.error(`You can only add ${BATCH_SIZE} addresses at a time`);
       return;
     }
 

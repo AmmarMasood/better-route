@@ -1,5 +1,6 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { BATCH_SIZE } from "../contants";
 
 interface DistanceMatrixResponse {
   destination_addresses: string[];
@@ -44,12 +45,13 @@ class GoogleMatrixAPI {
   private apiKey: string;
   private baseUrl: string =
     "https://maps.googleapis.com/maps/api/distancematrix/json";
+  private batchSize: number = 10;
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
   }
 
-  async getDistanceMatrix(
+  private async getDistanceMatrixBatch(
     origins: string[],
     destinations: string[]
   ): Promise<DistanceMatrixResponse> {
@@ -72,6 +74,53 @@ class GoogleMatrixAPI {
         throw new Error("An unexpected error occurred");
       }
     }
+  }
+
+  async getDistanceMatrix(
+    origins: string[],
+    destinations: string[]
+  ): Promise<DistanceMatrixResponse> {
+    const batchedResponses: DistanceMatrixResponse[] = [];
+
+    for (let i = 0; i < origins.length; i += this.batchSize) {
+      for (let j = 0; j < destinations.length; j += this.batchSize) {
+        const originBatch = origins.slice(i, i + this.batchSize);
+        const destBatch = destinations.slice(j, j + this.batchSize);
+        const batchResponse = await this.getDistanceMatrixBatch(
+          originBatch,
+          destBatch
+        );
+        batchedResponses.push(batchResponse);
+      }
+    }
+
+    // Combine batched responses
+    const combinedResponse: DistanceMatrixResponse = {
+      destination_addresses: destinations,
+      origin_addresses: origins,
+      rows: [],
+      status: "OK",
+    };
+
+    for (let i = 0; i < origins.length; i++) {
+      const row: { elements: any[] } = { elements: [] };
+      for (let j = 0; j < destinations.length; j++) {
+        const batchIndex =
+          Math.floor(i / this.batchSize) *
+            Math.ceil(destinations.length / this.batchSize) +
+          Math.floor(j / this.batchSize);
+        const batchRowIndex = i % this.batchSize;
+        const batchColIndex = j % this.batchSize;
+        row.elements.push(
+          batchedResponses[batchIndex].rows[batchRowIndex].elements[
+            batchColIndex
+          ]
+        );
+      }
+      combinedResponse.rows.push(row);
+    }
+
+    return combinedResponse;
   }
 
   private createDistanceAndDurationMatrices(response: DistanceMatrixResponse): {
@@ -115,8 +164,7 @@ class GoogleMatrixAPI {
   }
 
   async getOptimalRoute(addresses: string[]): Promise<OptimalRouteResult> {
-    const address = addresses.slice(0, 10);
-    const response = await this.getDistanceMatrix(address, address);
+    const response = await this.getDistanceMatrix(addresses, addresses);
     const { distanceMatrix, durationMatrix } =
       this.createDistanceAndDurationMatrices(response);
     const optimalPath = this.nearestNeighborTSP(distanceMatrix);
