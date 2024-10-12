@@ -7,6 +7,8 @@ import { withoutAuth } from "./hoc/withoutAuth";
 import { UserAuth } from "./context/AuthContext";
 import { useRouter } from "next/navigation";
 import Loading from "./components/Loading";
+import Image from "next/image";
+import Logo from "../images/Better_Route_Logo_3-01-removebg-preview.png";
 
 function Login() {
   const { emailPasswordSignin, setToken } = UserAuth() as any;
@@ -57,7 +59,10 @@ function Login() {
   return (
     <main className="flex items-center justify-center h-screen">
       <Loading show={loading} />
-      <div>
+
+      <div className="flex flex-col items-center">
+        <Image src={Logo} alt="Better Route Logo" width={100} height={50} />
+
         <h1 className={`${heading} mb-8 text-center`}>Login</h1>
         <form className={formContainer}>
           <label htmlFor="email" className={label}>

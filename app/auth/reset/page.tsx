@@ -58,7 +58,7 @@ function ResetPassword() {
       {contextHolder}
       <Loading show={loading} />
       <div>
-        <h1 className={`${heading} mb-8 text-center`}>Login</h1>
+        <h1 className={`${heading} mb-8 text-center`}>Reset Password</h1>
         <form className={formContainer}>
           <label htmlFor="email" className={label}>
             Email

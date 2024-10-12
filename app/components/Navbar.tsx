@@ -2,11 +2,14 @@ import { Dropdown, Space } from "antd";
 import React from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { UserAuth } from "../context/AuthContext";
+import Logo from "../../images/Better_Route_Logo_3-01-removebg-preview.png";
+import Image from "next/image";
 
 function Navbar({ userName }: { userName: string }) {
   const { logOut } = UserAuth() as any;
   return (
-    <nav className="bg-white flex items-end justify-end p-6">
+    <nav className="bg-white flex items-center justify-between px-6">
+      <Image src={Logo} alt="Better Route Logo" width={100} height={50} />
       <Dropdown
         menu={{
           items: [

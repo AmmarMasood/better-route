@@ -3,7 +3,9 @@ import React from "react";
 import GoogleAutocomplete from "./GoogleAutocomplete";
 
 function AddAddressModal({ open, setOpen, onSubmitAddress }: any) {
-  const [address, setAddress] = React.useState("");
+  const [address, setAddress] = React.useState(
+    "11 Wall St, New York, NY 10005, United States"
+  );
 
   const handleAddAddress = () => {
     if (!address) return;
