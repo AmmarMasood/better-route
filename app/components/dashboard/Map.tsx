@@ -68,6 +68,10 @@ function CustomMap({ mapData }: any) {
         const keyA = `${locationA.lat()},${locationA.lng()}`;
         const keyB = `${locationB.lat()},${locationB.lng()}`;
 
+
+        console.log("locationA",route.pointA, locationA, keyA);
+        console.log("locationB", route.pointB, locationB, keyB);
+
         if (!locations.has(keyA)) {
           locations.set(keyA, {
             position: locationA,

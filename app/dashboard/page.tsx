@@ -22,6 +22,7 @@ function Dashboard() {
     index: -1,
     paths: [],
   });
+  const [random, setRandom] = React.useState(0);
   const [messageApi, contextHolder] = message.useMessage();
   const [showAddAddressModal, setShowAddAddressModal] = React.useState(false);
   const [showImportDataModal, setShowImportDataModal] = React.useState(false);
@@ -84,6 +85,7 @@ function Dashboard() {
     setShowUpload(!showUpload);
   };
 
+
   const onSubmitAddress = async (address: string) => {
     if (!address) {
       message.error("Please enter an address");
@@ -115,6 +117,8 @@ function Dashboard() {
         index: mapData.index,
         paths: r.route as any,
       });
+      setRandom(Math.random());
+    
     } catch (err) {
       console.log(err);
       message.error("Failed to get optimal route");
@@ -142,6 +146,7 @@ function Dashboard() {
       index,
       paths,
     });
+    setRandom(Math.random());
   };
 
   const handleExport = () => {
@@ -228,7 +233,8 @@ function Dashboard() {
             setPathsForMap={setPathsForMap}
           />
         )}
-        <Map mapData={mapData.paths} key={mapData.index} />
+        
+        <Map mapData={mapData.paths} key={random} />
       </main>
     </div>
   );
