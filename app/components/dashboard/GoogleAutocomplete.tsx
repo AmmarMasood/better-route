@@ -21,7 +21,7 @@ const GoogleAutocomplete: React.FC<IGoogleAutocomplete> = ({
 }) => {
   // const [inputValue, setInputValue] = useState('');
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDMgMuIJ3Rv3Yt7OY75hDBuExkuicasaQU",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || '',
     libraries: ['places'],
   });
 
