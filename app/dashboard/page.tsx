@@ -26,7 +26,7 @@ function Dashboard() {
   const [messageApi, contextHolder] = message.useMessage();
   const [showAddAddressModal, setShowAddAddressModal] = React.useState(false);
   const [showImportDataModal, setShowImportDataModal] = React.useState(false);
-  const [uploadedPath, setUploadedPath] = React.useState<string[]>([]);
+  // const [uploadedPath, setUploadedPath] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [showUpload, setShowUpload] = React.useState(true);
   const [selectedPath, setSelectedPath] = React.useState(null);

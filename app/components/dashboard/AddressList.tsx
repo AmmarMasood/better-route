@@ -1,15 +1,14 @@
 import React from "react";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Input, Collapse } from "antd";
+import {  Collapse } from "antd";
 
 function AddressList({
   paths,
   selectedPath,
   onSelect,
-  filterPaths,
+  // filterPaths,
   setPathsForMap,
 }: any) {
-  const [currentKey, setCurrentKey] = React.useState("-1");
   const onChange = (key: any) => {
     const ind = parseInt(key[1]);
     if (ind === undefined || Number.isNaN(ind)) return;
@@ -25,7 +24,7 @@ function AddressList({
         className="m-2 w-[96.5%] bg-gray-100"
       /> */}
       <div>
-        <Collapse defaultActiveKey={[currentKey]} onChange={onChange}>
+        <Collapse defaultActiveKey={["-1"]} onChange={onChange}>
           {paths.map((paths: any, index: number) => (
             <Collapse.Panel key={index} header={`List ${index + 1}`}>
               {paths.map((path: any) => (

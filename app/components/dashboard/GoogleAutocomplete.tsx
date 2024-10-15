@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Script from 'next/script';
+import React, { useEffect } from 'react';
+// import Script from 'next/script';
 import { useLoadScript } from '@react-google-maps/api';
 
 interface IGoogleAutocomplete {
